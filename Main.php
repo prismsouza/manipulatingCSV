@@ -58,3 +58,4 @@ function dumpArray($array)
     var_dump($array);
     echo '</pre>';
 }
+//Editei alguma coisa

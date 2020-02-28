@@ -1,0 +1,21 @@
+{
+    "name": "primsouza/manipulating_csv",
+    "authors": [
+        {
+            "name": "primsouza",
+            "email": "priscila.souza@bombeiros.mg.gov.br"
+        }
+    ],
+    "description": "Manipulating CSV project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\":"app/"
+        },
+        "files": [
+            "app/FileConversion.php",
+            "app/Filters.php",
+            "app/FormattingData.php"
+        ]
+    }
+}

@@ -4,9 +4,9 @@ namespace App;
 
 class ManipulateArray {
 
-    public $header;
-    public $array;
-    public $registries = [];
+    private $header;
+    private $array;
+    private $registries = [];
 
     public function __construct($array) {
         $this->array = $array;
@@ -28,14 +28,16 @@ class ManipulateArray {
     public function setArray($array)
     {
         $this->array = $array;
-        foreach ($this->array as $registry) {
-            $this->setRegistry($registry);
-        }
+        $this->setRegistries($array);
     }
 
-    public function updateArray($id)
+    public function setRegistries($array)
     {
-        $this->array[] = $this->getRegistry($id);
+        $this->registries =[];
+        $this->array = $array;
+        foreach ($this->array as $registry) {
+            $this->registries[] = $registry;    
+        }
     }
 
     public function getArray()
@@ -43,14 +45,13 @@ class ManipulateArray {
         return $this->array;
     }
 
-    public function setRegistry($registry)
+    public function getRegistryByFieldContent($field, $content) 
     {
-        $this->registries[] = $registry;
-    }
-
-    public function getRegistry($id) 
-    {
-        return $this->registries[$id];
+        foreach ($this->registries as $registry) {
+            if ($registry["$field"] == $content) {
+                return $registry;
+            }
+        }
     }
 
     public function getElementInRegistry($id, $key) 

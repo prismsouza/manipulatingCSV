@@ -3,7 +3,7 @@
 function searchForData($registry, $dataToSearch) 
 {
     foreach ($registry as $key => $value) {
-        if ($value == $dataToSearch) {
+        if (strtoupper($value) == strtoupper($dataToSearch)) {
             return $registry;
         }
     }
@@ -15,7 +15,6 @@ function filterRegistry($registry, $dataToSearch)
     $filteredRegistry = searchForData($registry, $dataToSearch);
     if ($filteredRegistry) return $filteredRegistry;
 }
-
 
 function filterByKey($array, $field)
 {

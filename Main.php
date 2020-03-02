@@ -14,9 +14,8 @@ $delimiter = $csvObject->delimiter;
 $array = convertCSVtoArray($fileCsv, $delimiter);
 
 $arrayObject = new ManipulateArray($array);
-$arrayUsers = $arrayObject->array;
+$arrayUsers = $arrayObject->getArray();
 
-$arrayObject->eraseArray();
 $date_fields = ["birth_date", "inclusion_date" , "recadastration_date"];
 foreach ($arrayUsers as &$registry) {
     foreach($date_fields as $date) {
@@ -24,28 +23,27 @@ foreach ($arrayUsers as &$registry) {
     }
     $registry['number'] = removeSymbol($registry['number'], "-");
     $registry['is_active'] = strtoupper($registry['is_active']);
-    $arrayObject->setRegistry($registry);
-    $arrayObject->updateArray($registry['id']);
 }
+$arrayObject->setArray($arrayUsers);
 
 echo "<b>All Results</b>";
 $view->showTable($arrayObject->getArray(), $arrayObject->getArrayHeader());
 
-// Filtering
+$filteredRegistries = [];
 $dataToSearch = "F";
-echo "<br><b>Filter Registries By Female Gender: </b>" . $dataToSearch . "<br>";
-foreach ($arrayObject->getArray() as $registry) {
-    $r = filterRegistry($registry, $dataToSearch);
+echo "<br><b>Filter Registries By Content: </b>" . strtoupper($dataToSearch) . "<br>";
+foreach ($arrayObject->getArray() as $r) {
+    $r = filterRegistry($r, strtoupper($dataToSearch));
     if ($r) $filteredRegistries[] = $r;
 }
 $view->showTable($filteredRegistries, $arrayObject->getArrayHeader());
 
-echo "<br><b>Get Registries with ID 3, 4 and 5: </b><br>";
-$registry = [];
-$registry[] = $arrayObject->getRegistry(3);
-$registry[] = $arrayObject->getRegistry(4);
-$registry[] = $arrayObject->getRegistry(5);
-$view->showTable($registry, $arrayObject->getArrayHeader());
+echo "<br><b>Get Registries by Number 1640184, 1640226 and 1640192: </b><br>";
+$registries = [];
+$registries[] = $arrayObject->getRegistryByFieldContent("number", "1640184");
+$registries[] = $arrayObject->getRegistryByFieldContent("number", "1640226");
+$registries[] = $arrayObject->getRegistryByFieldContent("number", "1640192");
+$view->showTable($registries, $arrayObject->getArrayHeader());
 
 $key = "name";
 echo "<br><b>Filter Elements By Key: </b>" . $key. "<br>";

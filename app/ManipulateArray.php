@@ -8,8 +8,12 @@ class ManipulateArray {
     private $array;
     private $registries = [];
 
-    public function __construct($array) {
+    public function __construct($array, $hasHeader) {
         $this->array = $array;
+        if ($hasHeader) $this->hasHeader();
+    }
+
+    public function hasHeader() {
         $this->setArrayHeader($this->array);
         $this->array = $this->arrayKeyColumn($array);
         $this->setArray($this->array);
@@ -23,6 +27,14 @@ class ManipulateArray {
     public function getArrayHeader() 
     {
         return $this->header;
+    }
+
+    public function getHeader()
+    {
+        foreach ($this->array[0] as $key => $value) {
+            if ($key) $header[] = $key;
+        }
+        return $header;
     }
 
     public function setArray($array)

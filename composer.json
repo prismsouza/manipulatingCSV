@@ -7,7 +7,9 @@
         }
     ],
     "description": "Manipulating CSV project",
-    "require": {},
+    "require": {
+        "phpunit/phpunit": "5.4.*"
+    },
     "autoload": {
         "psr-4": {
             "App\\":"app/"
@@ -15,7 +17,8 @@
         "files": [
             "app/FileConversion.php",
             "app/Filters.php",
-            "app/FormattingData.php"
+            "app/FormattingData.php",
+            "app/Database.php"
         ]
     }
 }

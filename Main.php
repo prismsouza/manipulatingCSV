@@ -5,6 +5,7 @@ require __DIR__ . '/vendor/autoload.php';
 use App\Csv;
 use App\ManipulateArray;
 use App\View;
+use App\UserFactory;
 
 $csvObject = new csv("militares10.csv", ",", 1);
 $view = new View();
@@ -26,8 +27,12 @@ foreach ($arrayUsers as &$registry) {
 }
 $arrayObject->setArray($arrayUsers);
 
-echo "<b>All Results</b>";
-$view->showTable($arrayObject->getArray(), $arrayObject->getArrayHeader());
+//echo "<b>All Results</b>";
+//$view->showTable($arrayObject->getArray(), $arrayObject->getArrayHeader());
+
+/*$user = UserFactory::create("PRISCILA M");
+print_r($user->getName());*/
+
 
 $filteredRegistries = [];
 $dataToSearch = "F";
@@ -49,6 +54,7 @@ $key = "name";
 echo "<br><b>Filter Elements By Key: </b>" . $key. "<br>";
 $filteredByKey = filterByKey($arrayObject->getArray(), $key);
 $view->showList($filteredByKey);
+
 
 function dumpArray($array)
 {

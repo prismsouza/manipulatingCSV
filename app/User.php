@@ -1,10 +1,17 @@
 <?php
 
-class User {
-    private $name;
+namespace App;
 
-    public function getUser()
+class User {
+    public $userName;
+
+    public function __construct($name)
     {
-        
+        $this->userName = $name;
+    }
+
+    public function getName()
+    {
+        return $this->userName;
     }
 }
